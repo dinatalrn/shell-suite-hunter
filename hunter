@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Absolute path to this script. /home/user/bin/foo.sh
+SCRIPT=$(readlink -f $0)
+# Absolute path this script is in. /home/user/bin
+SCRIPTPATH=`dirname $SCRIPT`
+SCRIPTPATH=`echo "$SCRIPTPATH" | sed -E 's@^\\n@@'`
+
+SCOPE="src"
+
+if [ \( "$1" != "" \) -a \( `ls -p "${SCRIPTPATH}/${SCOPE}/" | grep -E "^${1}(.sh)?\\$" | wc -l` -eq 1 \) ]; then
+	FILE=`echo "$1" | sed -E 's#(.*)(.sh)?#'${SCOPE}'/./\1.sh#'`
+	shift
+	#echo "${SCRIPTPATH}/${FILE} $@"
+	${SCRIPTPATH}/${FILE} $@
+fi
