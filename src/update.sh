@@ -16,6 +16,8 @@ BRANCH=`cd $SCRIPTPATH && ( git branch | grep -E "^*" | awk '{ print $2 }' )`;
 
 self_update_git() {
 
+    echo_info "Searching the latest version...";
+
     cd $SCRIPTPATH && git fetch origin $BRANCH;
 
     [ `cd $SCRIPTPATH && git diff --name-only origin/$BRANCH | wc -l` -ne 0 ] && {
@@ -26,7 +28,7 @@ self_update_git() {
 
             cd $SCRIPTPATH && git pull --force origin $BRANCH
 
-            echo_success "Already the latest version.";
+            echo_success "I'm updated!!! \o/.";
 
         else
 
@@ -38,7 +40,7 @@ self_update_git() {
         # Now exit this old instance
         exit 0;
 
-    }
+    } || echo_success "Already the latest version.";
         
 }
 
