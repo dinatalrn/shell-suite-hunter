@@ -38,11 +38,11 @@ echo_warning(){
 }
 
 echo_info(){
-	echo_color $COLOR_LIGHT_BLUE "[INFO]    " && echo "$1"
+	echo_color $COLOR_LIGHT_BLUE "[INFO] " && echo "   $1"
 }
 
 echo_error(){
-	echo_color $COLOR_LIGHT_RED "[ERROR]   " && echo "$1"
+	echo_color $COLOR_LIGHT_RED "[ERROR] " && echo "  $1"
 }
 
 
