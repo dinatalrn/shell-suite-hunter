@@ -35,7 +35,7 @@ installation(){
 	fi
 
 	if [[ `which hunter | wc -l` -eq 0 ]]; then
-		echo "Instaalando binário... "
+		echo "Instalando binário... "
 		sudo ln -s $HOME/.drss/hunter /usr/local/bin/hunter
 	fi
 

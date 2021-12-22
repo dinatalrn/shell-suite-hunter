@@ -16,7 +16,7 @@ BRANCH=`cd $SCRIPTPATH && ( git branch | grep -E "^*" | awk '{ print $2 }' )`;
 
 self_update_git() {
 
-    echo_info "Searching the latest version...";
+    echo_warning "Buscando última versão...";
 
     cd $SCRIPTPATH && git fetch origin $BRANCH;
 
@@ -24,15 +24,15 @@ self_update_git() {
 
         if [[ $# -eq 0 ]]; then
             
-            echo_info "Found a new version of me, updating myself...";
+            echo_info "Nova versão encontrada, iniciando atualização...";
 
             cd $SCRIPTPATH && git pull --force origin $BRANCH
 
-            echo_success "I'm updated!!! \o/.";
+            echo_success "Estou atualizado!!! \o/.";
 
         else
 
-            echo_error ">>> Problem!! <<<";
+            echo_error ">>> Problema!! <<<";
             exit 1;
 
         fi
@@ -40,7 +40,7 @@ self_update_git() {
         # Now exit this old instance
         exit 0;
 
-    } || echo_success "Already the latest version.";
+    } || echo_success "Já estou na versão mais atualizada.";
         
 }
 
