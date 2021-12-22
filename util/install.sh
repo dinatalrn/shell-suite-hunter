@@ -27,6 +27,7 @@ installation(){
 	
 	if [ ! -d "$HOME/.drss" ]; then
 
+		echo "Instalando suite... "
 		SCRIPTDIR=`cd "$(dirname "$0")" && pwd`
 		SCRIPTDIR=`echo "$SCRIPTDIR" | sed -E 's#/[^/]+$##'`
 		mv $SCRIPTDIR $HOME/.drss
@@ -52,7 +53,8 @@ source \$HUNTER_HOME/lib/autocomplete.sh
 EOT
 
 		echo ""
-		echo 'Inicie uma nova sessão no terminal para usar os comandos.';
+		echo 'Para utilizar o hunter inicie uma nova sessão no terminal ou execute o comando a seguir:';
+		echo "    \$ export HUNTER_HOME=$HOME/.drss && source \$HUNTER_HOME/lib/autocomplete.sh"
 		echo ""
 	fi
 	
@@ -68,13 +70,17 @@ uninstallation(){
 	sed -i"" "/\\\$HUNTER_HOME/d" "$HOME/$BASH_FILE";
 
 	if [[ `which hunter | wc -l` -eq 1 ]]; then
+		echo 'Removendo binário... ';
 		sudo rm -f /usr/local/bin/hunter
 	fi
 
 	if [ -d "$HOME/.drss" ]; then
-		echo 'Removendo tudo... :(';
+		echo 'Removendo suite... ';
 		rm -rf $HOME/.drss;
 	fi
+
+	echo "Desinstalação finalizada!!! :'(";
+	echo ""
 }
 
 
