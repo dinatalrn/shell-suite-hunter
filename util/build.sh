@@ -66,7 +66,7 @@ for FILE_IN_SRC in `ls -p "$SCRIPTPATH/src" | grep -v "/"`; do
  
 	fi
 
-	echo -n "[$DIST_BUILD] " && echo_color $COLOR_YELLOW "[INFO] " && echo "O build foi concluído para o arquivo $FILENAME"
+	echo -n "[$DIST_BUILD] " && echo_color $COLOR_LIGHT_BLUE "[INFO] " && echo "O build foi concluído para o arquivo $FILENAME"
 
 done
 

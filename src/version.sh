@@ -12,12 +12,6 @@ SCRIPTPATH=`echo "$SCRIPTPATH" | sed -E 's#/[^/]+$##'`
 
 source $SCRIPTPATH/lib/echo-color.lib.sh
 
-if [[ `which git | wc -l` -eq 1 ]]; then
-	echo_info "Executando comando git em '$SCRIPTPATH'... "
-	#echo "$(cd $SCRIPTPATH && pwd)"
-	cd $SCRIPTPATH && git $@
-else
-	echo ""
-	echo_error "Precisa instalar o git!"
-	echo ""
-fi
+FORMATTED_DATE=`date -d @$(cd $SCRIPTPATH && git log -n1 --format="%ct") "+%Y-%m-%d %H:%M:%S"`
+
+echo_color $COLOR_YELLOW "Versão: " && echo "$FORMATTED_DATE"

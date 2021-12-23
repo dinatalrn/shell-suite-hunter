@@ -30,19 +30,19 @@ reset_color(){
 }
 
 echo_success(){
-	echo_color $COLOR_LIGHT_GREEN "[SUCCESS] " && echo "$1"
+	echo_color $COLOR_LIGHT_GREEN "[ SUCCESS ] " && echo "$1"
 }
 
 echo_warning(){
-	echo_color $COLOR_YELLOW "[WARNING] " && echo "$1"
+	echo_color $COLOR_YELLOW "[ WARNING ] " && echo "$1"
 }
 
 echo_info(){
-	echo_color $COLOR_LIGHT_BLUE "[INFO] " && echo "   $1"
+	echo_color $COLOR_LIGHT_BLUE "[ INFO >> ] " && echo "$1"
 }
 
 echo_error(){
-	echo_color $COLOR_LIGHT_RED "[ERROR] " && echo "  $1"
+	echo_color $COLOR_LIGHT_RED "[ ERROR > ] " && echo "$1"
 }
 
 

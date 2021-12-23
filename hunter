@@ -8,9 +8,41 @@ SCRIPTPATH=`echo "$SCRIPTPATH" | sed -E 's@^\\n@@'`
 
 SCOPE="src"
 
-if [ \( "$1" != "" \) -a \( `ls -p "${SCRIPTPATH}/${SCOPE}/" | grep -E "^${1}(.sh)?\\$" | wc -l` -eq 1 \) ]; then
-	FILE=`echo "$1" | sed -E 's#(.*)(.sh)?#'${SCOPE}'/./\1.sh#'`
-	shift
-	#echo "${SCRIPTPATH}/${FILE} $@"
-	${SCRIPTPATH}/${FILE} $@
-fi
+source $SCRIPTPATH/lib/echo-color.lib.sh
+
+case "$1" in
+	build )
+
+		${SCRIPTPATH}/util/build.sh
+
+		;;
+
+	git )
+
+		if [[ `which git | wc -l` -eq 1 ]]; then
+			shift
+			echo ""
+			echo_info "Executando comando git em '$SCRIPTPATH': "
+			echo ""
+			# echo "$(cd $SCRIPTPATH && pwd)"
+			# export LANG="en_US.UTF-8" 
+			cd $SCRIPTPATH && LANG=en_US git $@
+		else
+			echo ""
+			echo_error "Precisa instalar o git!"
+			echo ""
+		fi
+
+		;;
+
+	* )
+
+		if [ \( "$1" != "" \) -a \( `ls -p "${SCRIPTPATH}/${SCOPE}/" | grep -E "^${1}(.sh)?\\$" | wc -l` -eq 1 \) ]; then
+			FILE=`echo "$1" | sed -E 's#(.*)(.sh)?#'${SCOPE}'/./\1.sh#'`
+			shift
+			#echo "${SCRIPTPATH}/${FILE} $@"
+			${SCRIPTPATH}/${FILE} $@
+		fi
+
+		;;
+esac

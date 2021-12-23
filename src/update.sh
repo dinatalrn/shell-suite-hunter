@@ -18,24 +18,15 @@ self_update_git() {
 
     echo_warning "Buscando última versão...";
 
-    cd $SCRIPTPATH && git fetch origin $BRANCH;
+    cd $SCRIPTPATH && git fetch origin $BRANCH > /dev/null 2>&1
 
     [ `cd $SCRIPTPATH && git diff --name-only origin/$BRANCH | wc -l` -ne 0 ] && {
-
-        if [[ $# -eq 0 ]]; then
             
-            echo_info "Nova versão encontrada, iniciando atualização...";
+        echo_info "Nova versão encontrada, iniciando atualização...";
 
-            cd $SCRIPTPATH && git pull --force origin $BRANCH
+        cd $SCRIPTPATH && git pull --force origin $BRANCH > /dev/null 2>&1
 
-            echo_success "Estou atualizado!!! \o/.";
-
-        else
-
-            echo_error ">>> Problema!! <<<";
-            exit 1;
-
-        fi
+        echo_success "Estou atualizado!!! \o/.";
 
         # Now exit this old instance
         exit 0;
@@ -44,4 +35,4 @@ self_update_git() {
         
 }
 
-self_update_git $@;
+self_update_git
