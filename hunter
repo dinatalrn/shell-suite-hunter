@@ -42,6 +42,10 @@ case "$1" in
 			shift
 			#echo "${SCRIPTPATH}/${FILE} $@"
 			${SCRIPTPATH}/${FILE} $@
+		else
+			echo ""
+			echo_error "O comando '$1' não existe nesta suite hunter."
+			echo ""
 		fi
 
 		;;
