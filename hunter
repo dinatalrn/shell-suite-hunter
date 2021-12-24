@@ -35,13 +35,28 @@ case "$1" in
 
 		;;
 
+	dev )
+
+		shift
+		echo_color $COLOR_LIGHT_RED "Modo dev \n"
+		FILE=`[[ $(grep -E "\.sh\$" <<< "$1" | wc -l) -eq 1 ]] && echo "$1" || echo "${1}.sh"`
+		if [[ -f ${SCRIPTPATH}/${FILE} ]]; then
+			shift
+			#echo "${SCRIPTPATH}/${FILE} $@"
+			bash ${SCRIPTPATH}/${FILE} $@
+		else
+			echo_error "O comando '$1' não existe nesta suite hunter."
+		fi
+
+		;;
+
 	* )
 
 		if [ \( "$1" != "" \) -a \( `ls -p "${SCRIPTPATH}/${SCOPE}/" | grep -E "^${1}(.sh)?\\$" | wc -l` -eq 1 \) ]; then
-			FILE=`echo "$1" | sed -E 's#(.*)(.sh)?#'${SCOPE}'/./\1.sh#'`
+			FILE=`[[ $(grep -E "\.sh\$" <<< "$1" | wc -l) -eq 1 ]] && echo "$1" || echo "${1}.sh"`
 			shift
-			#echo "${SCRIPTPATH}/${FILE} $@"
-			${SCRIPTPATH}/${FILE} $@
+			#echo "${SCRIPTPATH}/${SCOPE}/${FILE} $@"
+			${SCRIPTPATH}/${SCOPE}/./${FILE} $@
 		else
 			echo ""
 			echo_error "O comando '$1' não existe nesta suite hunter."
