@@ -30,7 +30,7 @@ os_type(){
 }
 
 get_bash_file(){
-	[[ "$(os_type)" = "osx" ]] && echo ".bash_profile" || echo ".bashrc"
+	echo ".$(ps -p $$ -oargs= | awk '{print $1}' | grep -Eo '[a-z][^/]+$')rc"
 }
 
 installation(){

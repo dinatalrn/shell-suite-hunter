@@ -44,7 +44,7 @@ case "$1" in
 			shift
 			#echo "${SCRIPTPATH}/${FILE} $@"
 			bash ${SCRIPTPATH}/${FILE} $@
-		else
+		elif [[ "$1" != "" ]]; then
 			echo_error "O comando '$1' não existe nesta suite hunter."
 		fi
 
