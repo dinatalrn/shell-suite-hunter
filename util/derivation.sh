@@ -30,20 +30,24 @@ if [[ $# -eq 1 ]]; then
 		case "$CHOICE" in
 			""|[Yy] )
 				echo -n "Removendo controle de versão... "
-				#[ -d $SCRIPTDIR/.git ] && rm -rf $SCRIPTDIR/.git/
+				[ -d $SCRIPTDIR/.git ] && rm -rf $SCRIPTDIR/.git/
 				echo "Pronto!"
 
 				echo -n "Renomeando referências do 'hunter' para '$1'... "
-				#grep -R hunter $SCRIPTDIR | awk -F : '{print $1}' | grep -E '(/hunter|\.sh)$' | sort -u | grep -Ev 'derivation.sh$' | xargs sed -i'' 's/hunter/'$1'/g'
+				grep -R hunter $SCRIPTDIR | awk -F : '{print $1}' | grep -E '(/hunter|\.sh)$' | sort -u | grep -Ev 'derivation.sh$' | xargs sed -i'' 's/hunter/'$1'/g'
 				echo "Pronto!"
 
 				ENV_VAR_DERIVATION=`awk '{print toupper($0)}' <<< "${1}_HUNTER_HOME"`
 				echo -n "Renomeando referências da ENV_VAR 'HUNTER_HOME' para '$ENV_VAR_DERIVATION'... "
-				#grep -R "HUNTER_HOME" $SCRIPTDIR | awk -F : '{print $1}' | grep -E '(/hunter|\.sh)$' | sort -u | grep -Ev 'derivation.sh$' | xargs sed -i'' 's/HUNTER_HOME/'$ENV_VAR_DERIVATION'/g'
+				grep -R "HUNTER_HOME" $SCRIPTDIR | awk -F : '{print $1}' | grep -E '(/hunter|\.sh)$' | sort -u | grep -Ev 'derivation.sh$' | xargs sed -i'' 's/HUNTER_HOME/'$ENV_VAR_DERIVATION'/g'
 				echo "Pronto!"
 
-				echo -n "Removendo este script... "
-				#[ -f $SCRIPTDIR/util/derivation.sh ] && rm -f $SCRIPTDIR/util/derivation.sh
+				echo -n "Criando o '$1' com base no 'hunter'... "
+				[ -f $SCRIPTDIR/hunter ] && mv $SCRIPTDIR/hunter $SCRIPTDIR/$1
+				echo "Pronto!"
+
+				echo -n "Removendo este script de derivação... "
+				[ -f $SCRIPTDIR/util/derivation.sh ] && rm -f $SCRIPTDIR/util/derivation.sh
 				echo "Pronto!"
 				;;
 			* )
