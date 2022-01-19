@@ -9,7 +9,7 @@ help_derivation(){
 	echo "  dentre eles são permitidos apenas os seguintes caracteres: "
 	echo ""
 	echo "   - Entre 'a' e 'z'"
-	echo "   - Entre 0 à 9"
+	echo "   - Entre 0 e 9"
 	echo "   - E hífen (-)"
 	echo ""
 	echo "Porém o hífen (-) não poder ficar no início ou fim do novo nome."
